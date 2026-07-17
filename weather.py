@@ -117,9 +117,14 @@ current_data = get_current_weather(LATITUDE, LONGITUDE)
 temp_current = current_data["current"]["temperature_2m"]
 time_current = current_data["current"]["time"]
 
-temp_c = temp_current
-temp_f = round(9*(temp_c)/5 +32,1)
-log_df = pd.DataFrame({"date": [str(today)],"time": [time_current], "temperature_2m": [temp_current], "temp_f": [temp_f]})
+temp_c = current_temp
+temp_f = round(temp_c * 9/5 + 32, 1)
+log_df = pd.DataFrame({
+    "date": [str(today)],
+    "time": [time_current],
+    "temperature_2m": [temp_current],
+    "temp_f": [temp_f]  # ← just added
+})
 log_file = "daily_log.csv"
 log_df.to_csv(log_file, mode = 'a', header = not os.path.isfile(log_file), index = False)
 print(f"Logged current temperature: {temp_current} degrees C at {time_current}")
