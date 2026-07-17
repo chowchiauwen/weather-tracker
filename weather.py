@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import os
+os.environ['MPLBACKEND'] = 'Agg'
 from datetime import date
 
 # My camping location
